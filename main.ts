@@ -24,6 +24,10 @@ if (typeof post !== 'object' || post === null || typeof post.url !== 'string') {
   console.error('POST.json must be a JSON object with a string url');
   process.exit(1);
 }
+if (post.url.includes('<handle>')) {
+  console.error('POST.json still holds the placeholder address: post the meme on X first, then put the post URL in POST.json');
+  process.exit(1);
+}
 
 try {
   copyFileSync(join(BOT_DIR, 'POST.json'), join(OUTPUT_DIR, 'POST.json'));
